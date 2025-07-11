@@ -1,7 +1,12 @@
-import './App.css';
+import MultiCounter from './components/MultiCounter';
 
 function App() {
-  return <h1>Hello, React!</h1>;
+  return (
+    <div>
+      <h1>useState 예제</h1>
+      <MultiCounter />
+    </div>
+  );
 }
 
 export default App;
