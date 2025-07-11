@@ -1,7 +1,12 @@
-import './App.css';
+import ToggleBox from './components/ToggleBox';
 
 function App() {
-  return <h1>Hello, React!</h1>;
+  return (
+    <div>
+      <h1>🧠 커스텀 Hook 실습</h1>
+      <ToggleBox />
+    </div>
+  );
 }
 
 export default App;
