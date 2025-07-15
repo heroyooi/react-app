@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TodoContext } from './TodoContext';
 
 function TodoProvider({ children }) {
-  const [todos, setTodos] = useState([]);
+  const LOCAL_KEY = 'my_todos';
+
+  const [todos, setTodos] = useState(() => {
+    const saved = localStorage.getItem(LOCAL_KEY);
+    return saved ? JSON.parse(saved) : [];
+  });
+
   const [text, setText] = useState('');
 
   const handleAdd = () => {
@@ -30,6 +36,11 @@ function TodoProvider({ children }) {
     );
   };
 
+  // ✅ todos 변경 시 localStorage에 저장
+  useEffect(() => {
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(todos));
+  }, [todos]);
+
   return (
     <TodoContext.Provider value={{
         todos,
@@ -46,3 +57,4 @@ function TodoProvider({ children }) {
 }
 
 export default TodoProvider;
+
