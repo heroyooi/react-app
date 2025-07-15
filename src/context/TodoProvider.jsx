@@ -28,10 +28,21 @@ function TodoProvider({ children }) {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  const handleDeleteDone = () => {
+    // 완료된 항목만 걸러내서 삭제
+    setTodos(todos.filter((todo) => !todo.isDone));
+  };
+
   const handleToggle = (id) => {
+    // 1. 기존 todos 배열을 map으로 순회하면서
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+        // 2. 현재 순회 중인 todo의 id가 인자로 받은 id와 같으면
+        todo.id === id
+          ? // 3. isDone 상태를 반전시킨 새로운 객체를 반환 (true <-> false)
+            { ...todo, isDone: !todo.isDone }
+          : // 4. 그렇지 않으면 기존 객체 그대로 유지
+            todo
       )
     );
   };
@@ -42,13 +53,15 @@ function TodoProvider({ children }) {
   }, [todos]);
 
   return (
-    <TodoContext.Provider value={{
+    <TodoContext.Provider
+      value={{
         todos,
         setTodos,
         text,
         setText,
         handleAdd,
         handleDelete,
+        handleDeleteDone,
         handleToggle,
       }}
     >
@@ -58,4 +71,3 @@ function TodoProvider({ children }) {
 }
 
 export default TodoProvider;
-

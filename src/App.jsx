@@ -9,7 +9,8 @@ function TodoList() {
   return (
     <ul style={{ listStyle: 'none', padding: 0 }}>
       {todos.map((todo) => (
-        <TodoItem key={todo.id}
+        <TodoItem
+          key={todo.id}
           todo={todo}
           onToggle={handleToggle}
           onDelete={handleDelete}
@@ -20,11 +21,11 @@ function TodoList() {
 }
 
 function App() {
-  const { todos, setTodos } = useTodoContext();
+  const { todos, setTodos, handleDeleteDone } = useTodoContext();
 
   const handleClearAll = () => {
     localStorage.removeItem('my_todos'); // localStorage 비우기
-    setTodos([]);                        // 상태 비우기
+    setTodos([]); // 상태 비우기
   };
 
   return (
@@ -34,6 +35,7 @@ function App() {
       <TodoList />
       <p>총 {todos.length}개의 할 일이 있습니다.</p>
       <button onClick={handleClearAll}>🧹 전체 삭제</button>
+      <button onClick={handleDeleteDone}>🧹 완료된 항목만 삭제</button>
     </div>
   );
 }
