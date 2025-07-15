@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import TodoItem from './components/TodoItem';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -35,7 +36,7 @@ function App() {
 
   return (
     <div style={{ padding: '30px' }}>
-      <h1>✅ Todo 리스트</h1>
+      <h1>🧹 Todo 리스트</h1>
 
       <div style={{ marginBottom: '20px' }}>
         <input type="text"
@@ -49,25 +50,11 @@ function App() {
 
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {todos.map((todo) => (
-          <li key={todo.id} style={{ marginBottom: '10px' }}>
-            <input type="checkbox"
-              checked={todo.isDone}
-              onChange={() => handleToggle(todo.id)}
-            />
-            <span style={{
-                marginLeft: '10px',
-                textDecoration: todo.isDone ? 'line-through' : 'none',
-                color: todo.isDone ? '#999' : '#000',
-              }}
-            >
-              {todo.content}
-            </span>
-            <button onClick={() => handleDelete(todo.id)}
-              style={{ marginLeft: '10px' }}
-            >
-              삭제
-            </button>
-          </li>
+          <TodoItem key={todo.id}
+            todo={todo}
+            onToggle={handleToggle}
+            onDelete={handleDelete}
+          />
         ))}
       </ul>
 
