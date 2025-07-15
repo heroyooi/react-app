@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import TodoItem from './components/TodoItem';
+import TodoForm from './components/TodoForm';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -36,17 +37,13 @@ function App() {
 
   return (
     <div style={{ padding: '30px' }}>
-      <h1>🧹 Todo 리스트</h1>
+      <h1>📘 Todo 리스트</h1>
 
-      <div style={{ marginBottom: '20px' }}>
-        <input type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="할 일을 입력하세요"
-        />
-        <button onClick={handleAdd}>추가</button>
-      </div>
+      <TodoForm text={text}
+        onChange={(e) => setText(e.target.value)}
+        onAdd={handleAdd}
+        onKeyDown={handleKeyDown}
+      />
 
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {todos.map((todo) => (
