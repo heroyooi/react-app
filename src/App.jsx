@@ -20,7 +20,12 @@ function TodoList() {
 }
 
 function App() {
-  const { todos } = useTodoContext();
+  const { todos, setTodos } = useTodoContext();
+
+  const handleClearAll = () => {
+    localStorage.removeItem('my_todos'); // localStorage 비우기
+    setTodos([]);                        // 상태 비우기
+  };
 
   return (
     <div style={{ padding: '30px' }}>
@@ -28,6 +33,7 @@ function App() {
       <TodoForm />
       <TodoList />
       <p>총 {todos.length}개의 할 일이 있습니다.</p>
+      <button onClick={handleClearAll}>🧹 전체 삭제</button>
     </div>
   );
 }

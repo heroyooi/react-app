@@ -44,6 +44,7 @@ function TodoProvider({ children }) {
   return (
     <TodoContext.Provider value={{
         todos,
+        setTodos,
         text,
         setText,
         handleAdd,
