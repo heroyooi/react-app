@@ -1,4 +1,8 @@
-function ThemeToggle({ darkMode, setDarkMode }) {
+import { useDarkMode } from '../context/DarkModeContext';
+
+function ThemeToggle() {
+  const { darkMode, setDarkMode } = useDarkMode();
+
   return (
     <button onClick={() => setDarkMode(!darkMode)}>
       {darkMode ? '☀️ 라이트 모드' : '🌙 다크 모드'}
@@ -7,3 +11,4 @@ function ThemeToggle({ darkMode, setDarkMode }) {
 }
 
 export default ThemeToggle;
+

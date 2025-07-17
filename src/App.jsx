@@ -1,27 +1,24 @@
-import { useEffect, useState } from 'react';
+import { DarkModeProvider, useDarkMode } from './context/DarkModeContext';
 import ThemeToggle from './components/ThemeToggle';
 import './styles/theme.css';
 
-function App() {
-  // ✅ 1. 초기 상태를 localStorage에서 가져오기
-  const [darkMode, setDarkMode] = useState(() => {
-    const stored = localStorage.getItem('darkMode');
-    return stored === 'true'; // 문자열 → boolean
-  });
-
-  // ✅ 2. 상태가 바뀔 때 localStorage에 저장
-  useEffect(() => {
-    localStorage.setItem('darkMode', darkMode);
-  }, [darkMode]);
+function AppContent() {
+  const { darkMode } = useDarkMode();
 
   return (
     <div className={darkMode ? 'dark' : 'light'}>
       <div className="app-container">
-        <h1>🌗 다크모드 예제 (localStorage 적용)</h1>
-        <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
+        <h1>🌗 다크모드 (Context 적용)</h1>
+        <ThemeToggle />
       </div>
     </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <DarkModeProvider>
+      <AppContent />
+    </DarkModeProvider>
+  );
+}
